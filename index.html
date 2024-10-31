@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คำอธิฐานบอกกับแซนต้า</title>
+    <title>คำอธิษฐานบอกกับแซนต้า</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,28 +11,30 @@
     <div id="snow"></div> <!-- เพิ่มส่วนของหิมะ -->
 
     <div class="container">
-        <h1>ส่งคำอธิฐานของคุณกับแซนต้า!</h1>
+        <h1>ส่งคำอธิษฐานของคุณกับแซนต้า!</h1>
 
         <div class="wish-form">
             <label for="name">ชื่อของคุณ:</label>
             <input type="text" id="name" placeholder="กรอกชื่อของคุณ">
 
-            <label for="wish">คำอธิฐานของคุณ:</label>
-            <textarea id="wish" rows="4" placeholder="เขียนคำอวยพรของคุณ"></textarea>
+            <label for="wish">คำอธิษฐานของคุณ:</label>
+            <textarea id="wish" rows="4" placeholder="เขียนคำอธิษฐานของคุณ"></textarea>
 
-            <button id="submitWish">ส่งคำอธิฐาน</button>
+            <button id="submitWish">ส่งคำอธิษฐาน</button>
         </div>
 
-        <h2>คำอธิฐาน:</h2>
+        <h2>คำอธิษฐาน:</h2>
         <ul id="wishesList" class="wishes"></ul>
     </div>
 
     <script>
+        // ฟังก์ชันสำหรับโหลดคำอธิษฐานจาก localStorage และแสดงในหน้าเว็บ
         function loadWishes() {
             const storedWishes = JSON.parse(localStorage.getItem('wishes')) || [];
             storedWishes.forEach(wish => addWish(wish.name, wish.wish));
         }
 
+        // ฟังก์ชันสำหรับเพิ่มคำอธิษฐานใหม่ในหน้าเว็บ
         function addWish(name, wish) {
             const wishesList = document.getElementById('wishesList');
             const li = document.createElement('li');
@@ -40,26 +42,29 @@
             wishesList.appendChild(li);
         }
 
+        // ฟังก์ชันสำหรับบันทึกคำอธิษฐานใน localStorage
         function saveWish(name, wish) {
             const storedWishes = JSON.parse(localStorage.getItem('wishes')) || [];
             storedWishes.push({ name, wish });
             localStorage.setItem('wishes', JSON.stringify(storedWishes));
         }
 
+        // กำหนดการทำงานเมื่อกดปุ่มส่งคำอธิษฐาน
         document.getElementById('submitWish').addEventListener('click', () => {
             const name = document.getElementById('name').value;
             const wish = document.getElementById('wish').value;
 
             if (name && wish) {
-                addWish(name, wish);
-                saveWish(name, wish);
-                document.getElementById('name').value = '';
-                document.getElementById('wish').value = '';
+                addWish(name, wish); // เพิ่มคำอธิษฐานในหน้าเว็บ
+                saveWish(name, wish); // บันทึกคำอธิษฐานใน localStorage
+                document.getElementById('name').value = ''; // ล้างฟอร์ม
+                document.getElementById('wish').value = ''; // ล้างฟอร์ม
             } else {
-                alert('กรุณากรอกชื่อและอธิฐานของคุณ!');
+                alert('กรุณากรอกชื่อและคำอธิษฐานของคุณ!');
             }
         });
 
+        // โหลดคำอธิษฐานทั้งหมดเมื่อเปิดหน้าเว็บ
         window.onload = loadWishes;
     </script>
 </body>
