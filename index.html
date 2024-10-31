@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ผนังคำอวยพร</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .wish-form {
+            margin-bottom: 20px;
+        }
+        .wishes {
+            list-style-type: none;
+            padding: 0;
+        }
+        .wishes li {
+            background: #f0f0f0;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ส่งคำอวยพรของคุณ!</h1>
+
+    <div class="wish-form">
+        <label for="name">ชื่อของคุณ:</label>
+        <input type="text" id="name" required placeholder="กรอกชื่อของคุณ">
+        <br><br>
+        <label for="wish">คำอวยพรของคุณ:</label>
+        <textarea id="wish" rows="4" required placeholder="เขียนคำอวยพรของคุณ"></textarea>
+        <br><br>
+        <button id="submitWish">ส่งคำอวยพร</button>
+    </div>
+
+    <h2>คำอวยพร:</h2>
+    <ul id="wishesList" class="wishes"></ul>
+
+    <script>
+        // ฟังก์ชันในการเพิ่มคำอวยพรในรายการ
+        function addWish(name, wish) {
+            const wishesList = document.getElementById('wishesList');
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${name}</strong>: ${wish}`;
+            wishesList.appendChild(li);
+        }
+
+        // จัดการเมื่อผู้ใช้กดปุ่มส่งคำอวยพร
+        document.getElementById('submitWish').addEventListener('click', () => {
+            const name = document.getElementById('name').value;
+            const wish = document.getElementById('wish').value;
+
+            if (name && wish) {
+                addWish(name, wish);
+                document.getElementById('name').value = '';  // ล้างข้อมูลในฟอร์มชื่อ
+                document.getElementById('wish').value = '';  // ล้างข้อมูลในฟอร์มข้อความ
+            } else {
+                alert('กรุณากรอกชื่อและคำอวยพรของคุณ!');
+            }
+        });
+    </script>
+    
+</body>
+</html>
