@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>คำอธิฐานบอกกับแซนต้า</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Firebase App ( core ) -->
     <script src="https://www.gstatic.com/firebasejs/9.19.0/firebase-app.js"></script>
+    <!-- Firebase Firestore -->
     <script src="https://www.gstatic.com/firebasejs/9.19.0/firebase-firestore.js"></script>
 </head>
 <body>
 
-    <div id="snow"></div>
+    <div id="snow"></div> <!-- เพิ่มส่วนของหิมะ -->
 
     <div class="container">
         <h1>ส่งคำอธิฐานของคุณกับแซนต้า!</h1>
@@ -25,20 +27,23 @@
             <button id="submitWish">ส่งคำอธิฐาน</button>
         </div>
 
-        <h2>คำอธิฐาน:</h2>
+        <h2>คำอธิษฐาน:</h2>
         <ul id="wishesList" class="wishes"></ul>
     </div>
 
     <script>
+        // ตั้งค่า Firebase
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyDQZ-olJq3n0s3XVOj_QuyOPT7mvhgHhac",
+            authDomain: "gcec-78949.firebaseapp.com",
+            projectId: "gcec-78949",
+            storageBucket: "gcec-78949.appspot.com",
+            messagingSenderId: "879303311927",
+            appId: "1:879303311927:web:10e65783a32344dec2b5b2",
+            measurementId: "G-TD5RJEMB5R"
         };
 
+        // เริ่ม Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
@@ -48,6 +53,8 @@
                     const wish = doc.data();
                     addWish(wish.name, wish.wish);
                 });
+            }).catch((error) => {
+                console.error("เกิดข้อผิดพลาดในการโหลดคำอธิฐาน: ", error);
             });
         }
 
@@ -72,12 +79,12 @@
         }
 
         document.getElementById('submitWish').addEventListener('click', () => {
-            const name = document.getElementById('name').value;
-            const wish = document.getElementById('wish').value;
+            const name = document.getElementById('name').value.trim();
+            const wish = document.getElementById('wish').value.trim();
 
             if (name && wish) {
-                addWish(name, wish);
-                saveWish(name, wish);
+                saveWish(name, wish); // บันทึกคำอธิฐานก่อน
+                addWish(name, wish); // เพิ่มคำอธิฐานในรายการ
                 document.getElementById('name').value = '';
                 document.getElementById('wish').value = '';
             } else {
