@@ -4,30 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ผนังคำอวยพร</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        .wish-form {
-            margin-bottom: 20px;
-        }
-        .wishes {
-            list-style-type: none;
-            padding: 0;
-        }
-        .wishes li {
-            background: #f0f0f0;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <div class="fireplace"></div>
 
     <h1>ส่งคำอวยพรของคุณ!</h1>
 
@@ -45,13 +26,11 @@
     <ul id="wishesList" class="wishes"></ul>
 
     <script>
-        // ดึงข้อมูลคำอวยพรจาก Local Storage และแสดงบนหน้าเว็บ
         function loadWishes() {
             const storedWishes = JSON.parse(localStorage.getItem('wishes')) || [];
             storedWishes.forEach(wish => addWish(wish.name, wish.wish));
         }
 
-        // ฟังก์ชันในการเพิ่มคำอวยพรในรายการ
         function addWish(name, wish) {
             const wishesList = document.getElementById('wishesList');
             const li = document.createElement('li');
@@ -59,31 +38,29 @@
             wishesList.appendChild(li);
         }
 
-        // บันทึกคำอวยพรลงใน Local Storage
         function saveWish(name, wish) {
             const storedWishes = JSON.parse(localStorage.getItem('wishes')) || [];
             storedWishes.push({ name, wish });
             localStorage.setItem('wishes', JSON.stringify(storedWishes));
         }
 
-        // จัดการเมื่อผู้ใช้กดปุ่มส่งคำอวยพร
         document.getElementById('submitWish').addEventListener('click', () => {
             const name = document.getElementById('name').value;
             const wish = document.getElementById('wish').value;
 
             if (name && wish) {
                 addWish(name, wish);
-                saveWish(name, wish);  // บันทึกลงใน Local Storage
-                document.getElementById('name').value = '';  // ล้างข้อมูลในฟอร์มชื่อ
-                document.getElementById('wish').value = '';  // ล้างข้อมูลในฟอร์มข้อความ
+                saveWish(name, wish);
+                document.getElementById('name').value = '';
+                document.getElementById('wish').value = '';
             } else {
                 alert('กรุณากรอกชื่อและคำอวยพรของคุณ!');
             }
         });
 
-        // โหลดคำอวยพรที่บันทึกไว้เมื่อเปิดหน้าเว็บใหม่
         window.onload = loadWishes;
     </script>
-    
+
+    <div class="snow"></div>
 </body>
 </html>
