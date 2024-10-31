@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คำอธิษฐานบอกกับแซนต้า</title>
+    <title>คำอธิฐานบอกกับแซนต้า</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Firebase App ( core ) -->
+    <script src="https://www.gstatic.com/firebasejs/9.19.0/firebase-app.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/9.19.0/firebase-firestore.js"></script>
 </head>
 <body>
 
     <div id="snow"></div> <!-- เพิ่มส่วนของหิมะ -->
 
     <div class="container">
-        <h1>ส่งคำอธิษฐานของคุณกับแซนต้า!</h1>
+        <h1>ส่งคำอธิฐานของคุณกับแซนต้า!</h1>
 
         <div class="wish-form">
             <label for="name">ชื่อของคุณ:</label>
             <input type="text" id="name" placeholder="กรอกชื่อของคุณ">
 
-            <label for="wish">คำอธิษฐานของคุณ:</label>
-            <textarea id="wish" rows="4" placeholder="เขียนคำอธิษฐานของคุณ"></textarea>
+            <label for="wish">คำอธิฐานของคุณ:</label>
+            <textarea id="wish" rows="4" placeholder="เขียนคำอวยพรของคุณ"></textarea>
 
-            <button id="submitWish">ส่งคำอธิษฐาน</button>
+            <button id="submitWish">ส่งคำอธิฐาน</button>
         </div>
 
         <h2>คำอธิษฐาน:</h2>
@@ -28,13 +32,29 @@
     </div>
 
     <script>
-        // ฟังก์ชันสำหรับโหลดคำอธิษฐานจาก localStorage และแสดงในหน้าเว็บ
+        // ตั้งค่า Firebase
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // เริ่ม Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
         function loadWishes() {
-            const storedWishes = JSON.parse(localStorage.getItem('wishes')) || [];
-            storedWishes.forEach(wish => addWish(wish.name, wish.wish));
+            db.collection("wishes").get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const wish = doc.data();
+                    addWish(wish.name, wish.wish);
+                });
+            });
         }
 
-        // ฟังก์ชันสำหรับเพิ่มคำอธิษฐานใหม่ในหน้าเว็บ
         function addWish(name, wish) {
             const wishesList = document.getElementById('wishesList');
             const li = document.createElement('li');
@@ -42,29 +62,33 @@
             wishesList.appendChild(li);
         }
 
-        // ฟังก์ชันสำหรับบันทึกคำอธิษฐานใน localStorage
         function saveWish(name, wish) {
-            const storedWishes = JSON.parse(localStorage.getItem('wishes')) || [];
-            storedWishes.push({ name, wish });
-            localStorage.setItem('wishes', JSON.stringify(storedWishes));
+            db.collection("wishes").add({
+                name: name,
+                wish: wish
+            })
+            .then(() => {
+                console.log("คำอธิฐานบันทึกแล้ว");
+            })
+            .catch((error) => {
+                console.error("เกิดข้อผิดพลาดในการบันทึกคำอธิฐาน: ", error);
+            });
         }
 
-        // กำหนดการทำงานเมื่อกดปุ่มส่งคำอธิษฐาน
         document.getElementById('submitWish').addEventListener('click', () => {
             const name = document.getElementById('name').value;
             const wish = document.getElementById('wish').value;
 
             if (name && wish) {
-                addWish(name, wish); // เพิ่มคำอธิษฐานในหน้าเว็บ
-                saveWish(name, wish); // บันทึกคำอธิษฐานใน localStorage
-                document.getElementById('name').value = ''; // ล้างฟอร์ม
-                document.getElementById('wish').value = ''; // ล้างฟอร์ม
+                addWish(name, wish);
+                saveWish(name, wish);
+                document.getElementById('name').value = '';
+                document.getElementById('wish').value = '';
             } else {
-                alert('กรุณากรอกชื่อและคำอธิษฐานของคุณ!');
+                alert('กรุณากรอกชื่อและคำอธิฐานของคุณ!');
             }
         });
 
-        // โหลดคำอธิษฐานทั้งหมดเมื่อเปิดหน้าเว็บ
         window.onload = loadWishes;
     </script>
 </body>
