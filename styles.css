@@ -1,33 +1,68 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
-    overflow: hidden;
+    padding: 0;
     background: #1a1a1a;
     color: white;
+    text-align: center;
     position: relative;
 }
 
 h1 {
-    text-align: center;
+    margin-top: 20px;
+    font-size: 2rem;
 }
 
 .wish-form {
-    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
     width: 300px;
-    text-align: center;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f05454;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #d64343;
 }
 
 .wishes {
     list-style-type: none;
     padding: 0;
-    text-align: center;
+    margin: 20px 0;
 }
 
 .wishes li {
     background: rgba(255, 255, 255, 0.1);
-    margin: 10px 0;
     padding: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 .fireplace {
@@ -54,20 +89,5 @@ h1 {
 
 @keyframes snow {
     0% { transform: translateY(0); }
-    100% { transform: translateY(100vh); }
-}
-
-.snow:before {
-    content: '';
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    background: white;
-    opacity: 0.8;
-    animation: fall 5s infinite linear;
-}
-
-@keyframes fall {
-    0% { transform: translateY(-100px); }
     100% { transform: translateY(100vh); }
 }
