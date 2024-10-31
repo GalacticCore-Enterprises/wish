@@ -1,25 +1,6 @@
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #1a1a1a;
-    color: white;
-    text-align: center;
-    position: relative;
-}
-
-h1 {
-    margin-top: 20px;
-    font-size: 2rem;
-}
-
-.wish-form {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    margin: 20px auto;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    font-family: 'Poppins', sans-serif;
+    background-color: #f6f7f8;
 }
 
 input, textarea {
@@ -29,18 +10,14 @@ input, textarea {
     border: none;
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.2);
-    color: white;
-}
-
-input::placeholder, textarea::placeholder {
-    color: #ccc;
+    color: black;
 }
 
 button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #f05454;
+    background-color: #d3382e;
     color: white;
     font-size: 1rem;
     cursor: pointer;
@@ -48,72 +25,12 @@ button {
 }
 
 button:hover {
-    background-color: #d64343;
-}
-
-.wishes {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px 0;
+    background-color: #a12b24;
 }
 
 .wishes li {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
-
-.fireplace {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: 200px;
-    background: url('https://example.com/fireplace.png') no-repeat center center;
-    background-size: cover;
-}
-
-/* snoweffect design  */
-.snoweffect {
-    display: block;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    position: fixed;
-    background-repeat: repeat;
-    z-index: 1000000;
-    pointer-events: none;
-    -moz-animation: snow_animation 10s linear infinite;
-    -webkit-animation: snow_animation 10s linear infinite;
-    animation: snow_animation 10s linear infinite;
-}
-
-@-moz-keyframes snow_animation {
-    0% {
-        background-position: 0 0, 0 0, 0 0;
-    }
-    100% {
-        background-position: 500px 3000px, 0 400px, 0 300px;
-    }
-}
-@-webkit-keyframes snow_animation {
-    0% {
-        background-position: 0 0, 0 0, 0 0;
-    }
-    100% {
-        background-position: 500px 3000px, 0 400px, 0 300px;
-    }
-}
-@keyframes snow_animation {
-    0% {
-        background-position: 0 0, 0 0, 0 0;
-    }
-    100% {
-        background-position: 500px 3000px, 0 400px, 0 300px;
-    }
-}
-
