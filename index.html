@@ -16,10 +16,10 @@
         <div class="wish-form">
             <label for="name">ชื่อของคุณ:</label>
             <input type="text" id="name" placeholder="กรอกชื่อของคุณ">
-            
+
             <label for="wish">คำอธิฐานของคุณ:</label>
             <textarea id="wish" rows="4" placeholder="เขียนคำอวยพรของคุณ"></textarea>
-            
+
             <button id="submitWish">ส่งคำอธิฐาน</button>
         </div>
 
@@ -36,7 +36,7 @@
         function addWish(name, wish) {
             const wishesList = document.getElementById('wishesList');
             const li = document.createElement('li');
-            li.innerHTML = `<strong>${name}</strong>: ${wish}`;
+            li.innerHTML = `<strong>${name}</strong>: ${wish} <span class="confirmation">✔️</span>`; // เพิ่มเครื่องหมายยืนยัน
             wishesList.appendChild(li);
         }
 
