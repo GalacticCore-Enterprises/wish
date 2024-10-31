@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ส่งคำอวยพร</title>
+    <title>คำอธิฐานบอกกับแซนต้า</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,32 +11,32 @@
     <div id="snow"></div> <!-- เพิ่มส่วนของหิมะ -->
 
     <div class="container">
-        <h1>ส่งคำอวยพรของคุณ!</h1>
+        <h1>ส่งคำอธิฐานของคุณกับแซนต้า!</h1>
 
         <div class="wish-form">
             <label for="name">ชื่อของคุณ:</label>
             <input type="text" id="name" placeholder="กรอกชื่อของคุณ">
 
-            <label for="wish">คำอวยพรของคุณ:</label>
+            <label for="wish">คำอธิฐานของคุณ:</label>
             <textarea id="wish" rows="4" placeholder="เขียนคำอวยพรของคุณ"></textarea>
 
-            <button id="submitWish">ส่งคำอวยพร</button>
+            <button id="submitWish">ส่งคำอธิฐาน</button>
         </div>
 
-        <h2>คำอวยพร:</h2>
+        <h2>คำอธิฐาน:</h2>
         <ul id="wishesList" class="wishes"></ul>
     </div>
 
     <script>
         function loadWishes() {
             const storedWishes = JSON.parse(localStorage.getItem('wishes')) || [];
-            storedWishes.forEach((wish, index) => addWish(wish.name, wish.wish, index));
+            storedWishes.forEach(wish => addWish(wish.name, wish.wish));
         }
 
-        function addWish(name, wish, index) {
+        function addWish(name, wish) {
             const wishesList = document.getElementById('wishesList');
             const li = document.createElement('li');
-            li.innerHTML = `<strong>${name}</strong>: ${wish} <button onclick="deleteWish(${index})">ลบ</button>`;
+            li.innerHTML = `<strong>${name}</strong>: ${wish}`;
             wishesList.appendChild(li);
         }
 
@@ -46,24 +46,17 @@
             localStorage.setItem('wishes', JSON.stringify(storedWishes));
         }
 
-        function deleteWish(index) {
-            const storedWishes = JSON.parse(localStorage.getItem('wishes')) || [];
-            storedWishes.splice(index, 1); // ลบข้อความที่ระบุ
-            localStorage.setItem('wishes', JSON.stringify(storedWishes)); // บันทึกข้อมูลใหม่
-            loadWishes(); // โหลดข้อมูลใหม่เพื่อแสดงใน UI
-        }
-
         document.getElementById('submitWish').addEventListener('click', () => {
             const name = document.getElementById('name').value;
             const wish = document.getElementById('wish').value;
 
             if (name && wish) {
-                addWish(name, wish, 0); // เพิ่มข้อมูลใหม่ที่ตำแหน่งเริ่มต้น
+                addWish(name, wish);
                 saveWish(name, wish);
                 document.getElementById('name').value = '';
                 document.getElementById('wish').value = '';
             } else {
-                alert('กรุณากรอกชื่อและคำอวยพรของคุณ!');
+                alert('กรุณากรอกชื่อและอธิฐานของคุณ!');
             }
         });
 
