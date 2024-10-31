@@ -45,12 +45,25 @@
     <ul id="wishesList" class="wishes"></ul>
 
     <script>
+        // ดึงข้อมูลคำอวยพรจาก Local Storage และแสดงบนหน้าเว็บ
+        function loadWishes() {
+            const storedWishes = JSON.parse(localStorage.getItem('wishes')) || [];
+            storedWishes.forEach(wish => addWish(wish.name, wish.wish));
+        }
+
         // ฟังก์ชันในการเพิ่มคำอวยพรในรายการ
         function addWish(name, wish) {
             const wishesList = document.getElementById('wishesList');
             const li = document.createElement('li');
             li.innerHTML = `<strong>${name}</strong>: ${wish}`;
             wishesList.appendChild(li);
+        }
+
+        // บันทึกคำอวยพรลงใน Local Storage
+        function saveWish(name, wish) {
+            const storedWishes = JSON.parse(localStorage.getItem('wishes')) || [];
+            storedWishes.push({ name, wish });
+            localStorage.setItem('wishes', JSON.stringify(storedWishes));
         }
 
         // จัดการเมื่อผู้ใช้กดปุ่มส่งคำอวยพร
@@ -60,12 +73,16 @@
 
             if (name && wish) {
                 addWish(name, wish);
+                saveWish(name, wish);  // บันทึกลงใน Local Storage
                 document.getElementById('name').value = '';  // ล้างข้อมูลในฟอร์มชื่อ
                 document.getElementById('wish').value = '';  // ล้างข้อมูลในฟอร์มข้อความ
             } else {
                 alert('กรุณากรอกชื่อและคำอวยพรของคุณ!');
             }
         });
+
+        // โหลดคำอวยพรที่บันทึกไว้เมื่อเปิดหน้าเว็บใหม่
+        window.onload = loadWishes;
     </script>
     
 </body>
