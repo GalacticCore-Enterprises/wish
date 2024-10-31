@@ -8,22 +8,24 @@
 </head>
 <body>
 
-    <div class="fireplace"></div>
+    <div id="snow"></div> <!-- เพิ่มส่วนของหิมะ -->
 
-    <h1>ส่งคำอวยพรของคุณ!</h1>
+    <div class="container">
+        <h1>ส่งคำอวยพรของคุณ!</h1>
 
-    <div class="wish-form">
-        <label for="name">ชื่อของคุณ:</label>
-        <input type="text" id="name" placeholder="กรอกชื่อของคุณ">
-        <br><br>
-        <label for="wish">คำอวยพรของคุณ:</label>
-        <textarea id="wish" rows="4" placeholder="เขียนคำอวยพรของคุณ"></textarea>
-        <br><br>
-        <button id="submitWish">ส่งคำอวยพร</button>
+        <div class="wish-form">
+            <label for="name">ชื่อของคุณ:</label>
+            <input type="text" id="name" placeholder="กรอกชื่อของคุณ">
+            
+            <label for="wish">คำอวยพรของคุณ:</label>
+            <textarea id="wish" rows="4" placeholder="เขียนคำอวยพรของคุณ"></textarea>
+            
+            <button id="submitWish">ส่งคำอวยพร</button>
+        </div>
+
+        <h2>คำอวยพร:</h2>
+        <ul id="wishesList" class="wishes"></ul>
     </div>
-
-    <h2>คำอวยพร:</h2>
-    <ul id="wishesList" class="wishes"></ul>
 
     <script>
         function loadWishes() {
@@ -60,7 +62,5 @@
 
         window.onload = loadWishes;
     </script>
-
-    <div class="snow"></div>
 </body>
 </html>
