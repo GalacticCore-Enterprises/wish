@@ -5,60 +5,59 @@ body {
 
 input, textarea {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
     border: none;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.6); /* เพิ่มความใส */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
     color: black;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+input:focus, textarea:focus {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* เปลี่ยนเงาเมื่อโฟกัส */
+    outline: none; /* ลบเส้นขอบที่เกิดขึ้นเมื่อกด */
 }
 
 button {
-    padding: 10px 20px;
+    padding: 15px 25px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #d3382e;
     color: white;
-    font-size: 1rem;
+    font-size: 1.2rem;
     cursor: pointer;
-    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
     background-color: #a12b24;
+    transform: translateY(-2px); /* ยกปุ่มขึ้นเล็กน้อย */
+}
+
+button:active {
+    background-color: #821d1a;
+    transform: translateY(2px); /* ลดปุ่มลงเมื่อคลิก */
 }
 
 .wishes li {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    color: #333;
+    transition: background-color 0.3s ease;
 }
 
-@-webkit-keyframes snow {
-    0% { background-position: 0px 0px, 0px 0px, 0px 0px }
-    50% { background-color: #b4cfe0 }
-    100% {
-        background-position: 500px 1000px, 400px 400px, 300px 300px;
-        background-color: #6b92b9;
-    }
+.wishes li:hover {
+    background-color: #f1f1f1; /* เปลี่ยนสีพื้นหลังเมื่อโฮเวอร์ */
 }
-@-moz-keyframes snow {
-    0% { background-position: 0px 0px, 0px 0px, 0px 0px }
-    50% { background-color: #b4cfe0 }
-    100% {
-        background-position: 500px 1000px, 400px 400px, 300px 300px;
-        background-color: #6b92b9;
-    }
-}
-@-ms-keyframes snow {
-    0% { background-position: 0px 0px, 0px 0px, 0px 0px }
-    50% { background-color: #b4cfe0 }
-    100% {
-        background-position: 500px 1000px, 400px 400px, 300px 300px;
-        background-color: #6b92b9;
-    }
-}
+
 @keyframes snow {
     0% { background-position: 0px 0px, 0px 0px, 0px 0px }
     50% { background-color: #b4cfe0 }
@@ -67,15 +66,15 @@ button:hover {
         background-color: #6b92b9;
     }
 }
+
 #snow {
     background-color: #6b92b9;
     background-image: url('https://i.imgur.com/BiSmXaq.png'), url('https://i.imgur.com/XHuy0NJ.png'), url('https://i.imgur.com/okpRxJU.png');
-    -webkit-animation: snow 20s linear infinite;
-    -moz-animation: snow 20s linear infinite;
-    -ms-animation: snow 20s linear infinite;
+    background-size: 150px, 100px, 75px; /* ปรับขนาดหิมะให้แตกต่างกัน */
+    opacity: 0.8; /* เพิ่มความโปร่งใส */
+    position: absolute; 
+    height: 100vh; 
+    width: 100%;
+    z-index: -1; /* ให้ภาพหิมะอยู่ข้างหลังเนื้อหา */
     animation: snow 20s linear infinite;
-  position: absolute; height: 100vh; width: 100%
 }
-
-
-
